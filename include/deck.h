@@ -23,8 +23,7 @@ public:
     void add(const T& element);
 
     // Shuffle the deck
-    void shuffle();
-
+    void shuffle(int seed = 1106);
 
     // Check if the deck is empty
     bool isEmpty() const;

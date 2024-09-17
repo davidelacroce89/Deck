@@ -1,13 +1,14 @@
 #include "deck.h"
 
 #include <iostream>
-
+#include <algorithm>
+#include <random> 
 
 
 template <typename T>
 Deck<T>::Deck()
 {
-    std::cout << "The Deck is empty";
+    std::cout << "The Deck is empty" << std::endl;
 }
 
 template <typename T>
@@ -38,11 +39,21 @@ T Deck<T>::bottom()
     return m_deck.back();  // Get the element at the front
 }
 
-// Shuffle the deck
+// Not sure how to shuffle the list, but the std::vector can be shuffled easier
 template <typename T>
-void Deck<T>::shuffle() 
+void Deck<T>::shuffle(int seed) 
 {
-    //TODO I will do it later...
+    // Convert list to vector
+    std::vector<T> temp(m_deck.begin(), m_deck.end());
+
+    std::default_random_engine engine(seed);
+
+    // Shuffle the vector
+    std::shuffle(temp.begin(), temp.end(), engine);
+
+    //clear and add in place to the private list
+    m_deck.clear();
+    m_deck.insert(m_deck.end(), temp.begin(), temp.end());
 }
 
 // Draw (remove and return) an element from the top of the deck
@@ -68,8 +79,9 @@ bool Deck<T>::isEmpty() const {
 template <typename T>
 void Deck<T>::printDeck() const 
 {
-    for (const auto& card : m_deck) {
-        std::cout << card << " ";
+    std::cout << "Deck content:" << std::endl;
+    for (const auto& elem : m_deck) {
+        std::cout << elem << std::endl;
     }
     std::cout << std::endl;
 }
