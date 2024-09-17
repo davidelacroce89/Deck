@@ -2,10 +2,18 @@
 
 #include <iostream>
 
+
+
 template <typename T>
 Deck<T>::Deck()
 {
     std::cout << "The Deck is empty";
+}
+
+template <typename T>
+void Deck<T>::add(const T& element)
+{
+    m_deck.push_back(element);
 }
 
 // Draw (remove and return) an element from the top of the deck
@@ -67,3 +75,7 @@ void Deck<T>::printDeck() const
 }
 
 
+// Explicit instantiation for the Deck<int> type
+template class Deck<int>;
+
+template class Deck<std::string>;

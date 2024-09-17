@@ -33,6 +33,8 @@ public:
     void printDeck() const;
 
 private:
+
+    //List allows easy insertion in between, otherwise a std::vector is easier...
     std::list<T> m_deck;  // std::list used as the underlying container
 };
 
