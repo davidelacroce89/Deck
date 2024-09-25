@@ -1,8 +1,44 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <cstdint>
+#include <iostream>
 #include "deck.h"
 
+TEST_CASE("Test Container requirements")
+{
+    Deck<int> deck;
+
+    REQUIRE(deck.empty());
+    REQUIRE(deck.size() == 0);
+
+    deck.add(-24);
+    REQUIRE(!deck.empty());
+    REQUIRE(deck.size() == 1);
+
+    deck.add(7344346);
+    REQUIRE(!deck.empty());
+    REQUIRE(deck.size() == 2);
+
+    //test operator []
+    REQUIRE(deck[deck.size()-1] == 7344346);
+
+    //test iterator change by reference
+    std::cout << "List and modify with constant" << std::endl;
+    for (auto &elem: deck)
+    {
+        std::cout << "Before: " << elem << std::endl;
+        elem+=345345345;
+    }
+
+    std::cout << "List as const reference" << std::endl;
+    for (auto const &elem: deck)
+    {
+        std::cout << "After: " << elem << std::endl;
+    }
+
+    std::cout << "Max size: " << deck.max_size() << std::endl;
+
+}
 
 TEST_CASE("Test int")
 {
